@@ -1,9 +1,10 @@
-# Memory Game Project
+# Virtual Memory
 
 ## Table of Contents
 
 * [Instructions](#instructions)
 * [Contributing](#contributing)
+* [3rd Party Code](#3rd Party Code)
 
 ## Instructions
 
@@ -18,3 +19,11 @@ For specific, detailed instructions, look at the project instructions in the [Ud
 This repository is the starter code for _all_ Udacity students. Therefore, we most likely will not accept pull requests.
 
 For details, check out [CONTRIBUTING.md](CONTRIBUTING.md).
+
+## 3rd Party Code
+
+The following 3rd party libraries and support files were used in this project:
+* [Glyph Icons](http://github.com/frexy/glyph-iconset)
+* [Bootstrap]()
+* [jQuery]()
+* [Popper.js]()
