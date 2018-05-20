@@ -1,14 +1,36 @@
-/*
- * Create a list that holds all of your cards
- */
-
 
 /*
- * Display the cards on the page
- *   - shuffle the list of cards using the provided "shuffle" method below
- *   - loop through each card and create its HTML
- *   - add each card's HTML to the page
- */
+Variables and functions for card deck
+
+let deckSize = 8;
+
+let iconSet = [];
+
+$(document).ready(function() {
+  $.get('./img/glyph/svg/', function(data) {
+    icons.push(data);
+  }
+}
+*/
+
+let deck = [];
+
+$(document).ready(function() {
+  /*
+  stuff to do when page loads
+  */
+});
+
+/*
+* Display the cards on the page
+*   - shuffle the list of cards using the provided "shuffle" method below
+*   - loop through each card and create its HTML
+*   - add each card's HTML to the page
+*/
+
+function deploy() {
+
+}
 
 // Shuffle function from http://stackoverflow.com/a/2450976
 function shuffle(array) {
@@ -24,6 +46,7 @@ function shuffle(array) {
 
     return array;
 }
+
 
 
 /*
