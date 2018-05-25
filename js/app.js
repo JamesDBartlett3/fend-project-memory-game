@@ -4,7 +4,6 @@ Variable declaration
 */
 
 const gameSurface = document.querySelector('.game-surface');
-let cardDeck = [''];
 
 
 /*
@@ -17,9 +16,14 @@ function loadGlyphs() {
 }
 
 function dealCards() {
-  const cardContainer = '';
-  const cardDeck = '';
-  gameSurface.innerHTML = '';
+  const container = '<div class="deck-container"></div>';
+  const deck = '<div class="deck"></div>';
+  const row = '<div class="row"></div>'
+  const card = '<div class="card col-2"></div>';
+  $('.game-surface').children().remove();
+  $('.game-surface').append(container + deck);
+  $('.deck').append(row + row + row + row);
+  $('.row').append(card + card + card + card);
 
 }
 

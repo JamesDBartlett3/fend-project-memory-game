@@ -1,10 +1,10 @@
 #!/bin/bash
 i=0
-j=0
+j=1
 x=0
 s=600
-clear
 while true; do
+clear
 until [ $i -gt $s ]; do
 sleep 1
 let x=$s-$i
@@ -12,15 +12,15 @@ echo -ne $x
 echo -ne " seconds until task switch...\r"
 let i+=1
 done
-say Announcement: It is time to switch tasks. You have 30 seconds to find a new task!
-while true; do
-until [ $j -gt 30 ]; do
+say Announcement: It is time to switch tasks. You have 10 seconds to find a new task!
+clear
+let j=1
+until [ $j -gt 10 ]; do
 say $j
-sleep 1
+sleep 0.25
 let j+=1
 done
 say Begin your new task now!
-done
 let i=0
-let s=600
+let j=1
 done

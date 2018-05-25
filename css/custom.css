@@ -16,15 +16,11 @@ body {
 }
 
 .game-surface {
-  width: calc(80vw);
+  width: calc(75vw);
+  height: calc(75vh);
 }
 
-.game-surface::after {
-/*   content = "";
-display: block;
-padding-bottom: 100%; */
-  height: calc(80vw);
-}
+
 
 #card-container {
 
