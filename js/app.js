@@ -1,20 +1,16 @@
 
 /*
-Variables and functions for card deck
-
-let deckSize = 8;
-
-let iconSet = [];
-
-$(document).ready(function() {
-  $.get('./img/glyph/svg/', function(data) {
-    icons.push(data);
-  }
-}
+Variable declaration
 */
 
-const surface = document.querySelector('.game-surface');
+const gameSurface = document.querySelector('.game-surface');
 let cardDeck = [''];
+
+
+/*
+Function instantiation
+*/
+
 
 function loadGlyphs() {
   let glyphs = []
@@ -41,20 +37,6 @@ $(document).ready(function() {
 */
 
 
-function svgEnum() {
-  // Snippet Source: https://stackoverflow.com/a/11213851
-  $.ajax({
-    url: "./img/glyphs/svg/",
-    success: function(data){
-       $(data).find("a:contains(.svg)").each(function(){
-          // will loop through
-          let images = $(this).attr("href");
-          console.log(images);
-
-       });
-    }
-  });
-}
 
 // Shuffle function from http://stackoverflow.com/a/2450976
 function shuffle(array) {

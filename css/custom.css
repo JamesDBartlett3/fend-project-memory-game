@@ -15,18 +15,17 @@ body {
   /* font-family: 'Coda', cursive; */
 }
 
-.card-container {
-  display: flex;
-  /* flex-wrap: wrap; */
-  position: relative;
-  justify-content: center;
-  width: calc(100% - 20px);
-  height: calc(100vmin - 20px);
+.game-surface {
+  width: calc(80vw);
 }
 
-.game-surface {
-  justify-content: center;
-  margin-top: 12px;
-  width: 95vw;
-  margin: auto;
+.game-surface::after {
+/*   content = "";
+display: block;
+padding-bottom: 100%; */
+  height: calc(80vw);
+}
+
+#card-container {
+
 }
