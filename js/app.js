@@ -7,6 +7,10 @@ let moves = 0;
 let matches = 0;
 let timer = 0;
 const gameSurface = $('.game-surface');
+const dc = '<div class="deck-container"></div>';
+const d = '<div class="deck"></div>';
+const r = '<div class="row"></div>';
+const c = '<div class="card"></div>';
 
 /*
 Function instantiation
@@ -17,20 +21,15 @@ function loadGlyphs() {
   let glyphs = []
 }
 
-function deal() {
 
-}
 
 
 $(document).ready(function() {
   /*
   stuff to do when page loads
   */
-  const dc = '<div class="deck-container"></div>';
-  const d = '<div class="deck"></div>';
-  const r = '<div class="row"></div>';
-  const c = '<div class="card"></div>';
-  gameSurface.children().remove();
+
+  gameSurface.children().remove('.deck-container');
   gameSurface.append(dc);
   const deckContainer = $('.deck-container');
   deckContainer.append(d);
@@ -39,7 +38,6 @@ $(document).ready(function() {
   const row = $('.row');
   row.append(c + c + c + c);
   gameSurface.toggleClass('hidden');
-
 
 
 });

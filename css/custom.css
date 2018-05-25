@@ -7,6 +7,7 @@ body {
   code snippet for making background image always fit the display, source:
   https://css-tricks.com/perfect-full-page-background-image/
   */
+  color: #fff;
   background: #030f13 url('../img/circuitry.svg'); /* image source: https://bit.ly/2GywJFO */ no-repeat center center fixed;
   -webkit-background-size: cover;
   -moz-background-size: cover;
@@ -40,5 +41,9 @@ body {
 }
 
 .card-container {
+
+}
+
+.score-panel {
 
 }
