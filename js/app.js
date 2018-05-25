@@ -3,8 +3,9 @@
 Variable declaration
 */
 
-const gameSurface = document.querySelector('.game-surface');
-
+let moves = 0;
+let matches = 0;
+let timer = 0;
 
 /*
 Function instantiation
@@ -15,22 +16,23 @@ function loadGlyphs() {
   let glyphs = []
 }
 
-function dealCards() {
-  const container = '<div class="deck-container"></div>';
-  const deck = '<div class="deck"></div>';
-  const row = '<div class="row"></div>'
-  const card = '<div class="card col-2"></div>';
-  $('.game-surface').children().remove();
-  $('.game-surface').append(container + deck);
-  $('.deck').append(row + row + row + row);
-  $('.row').append(card + card + card + card);
 
-}
 
 $(document).ready(function() {
   /*
   stuff to do when page loads
   */
+  
+  const container = '<div class="deck-container"></div>';
+  const deck = '<div class="deck"></div>';
+  const row = '<div class="row"></div>'
+  const card = '<div class="card"></div>';
+  $('.game-surface').children().remove();
+  $('.game-surface').append(container);
+  $('.deck-container').append(deck);
+  $('.deck').append(row + row + row + row);
+  $('.row').append(card + card + card + card);
+
 
 });
 

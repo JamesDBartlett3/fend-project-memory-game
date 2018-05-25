@@ -16,12 +16,28 @@ body {
 }
 
 .game-surface {
-  width: calc(75vw);
-  height: calc(75vh);
+  width: 85vw;
+  align-items: center;
+  text-align: center;
+  flex-wrap: nowrap;
+}
+.game-surface::after {
+
 }
 
+.row {
+  height: 25%;
+  flex-wrap: nowrap;
+  margin-left: 0em;
+  margin-right: 0em;
+}
 
+.deck-container {
+  height:80vh;
+  /* min-width: 20em;
+  min-height: 20em; */
+}
 
-#card-container {
+.card-container {
 
 }
