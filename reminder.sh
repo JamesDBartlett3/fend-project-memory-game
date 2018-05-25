@@ -12,7 +12,7 @@ echo -ne $x
 echo -ne " seconds until task switch...\r"
 let i+=1
 done
-say Announcement: It is time to switch tasks. You have 10 seconds to find a new task!
+say Attention: It is time to switch tasks. You have 10 seconds to find a new task!
 clear
 let j=1
 until [ $j -gt 10 ]; do
