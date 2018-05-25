@@ -31,6 +31,17 @@ $(document).ready(function() {
   stuff to do when page loads
   */
 
+});
+
+/*
+* Display the cards on the page
+*   - shuffle the list of cards using the provided "shuffle" method below
+*   - loop through each card and create its HTML
+*   - add each card's HTML to the page
+*/
+
+
+function svgEnum() {
   // Snippet Source: https://stackoverflow.com/a/11213851
   $.ajax({
     url: "./img/glyphs/svg/",
@@ -43,17 +54,7 @@ $(document).ready(function() {
        });
     }
   });
-
-});
-
-/*
-* Display the cards on the page
-*   - shuffle the list of cards using the provided "shuffle" method below
-*   - loop through each card and create its HTML
-*   - add each card's HTML to the page
-*/
-
-
+}
 
 // Shuffle function from http://stackoverflow.com/a/2450976
 function shuffle(array) {
