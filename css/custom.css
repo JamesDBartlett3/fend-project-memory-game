@@ -1,3 +1,32 @@
 h1 {
   font-family: "Black Ops One";
 }
+
+body {
+  /*
+  code snippet for making background image always fit the display, source:
+  https://css-tricks.com/perfect-full-page-background-image/
+  */
+  background: #030f13 url('../img/circuitry.svg'); /* image source: https://bit.ly/2GywJFO */ no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  /* font-family: 'Coda', cursive; */
+}
+
+.card-container {
+  display: flex;
+  /* flex-wrap: wrap; */
+  position: relative;
+  justify-content: center;
+  width: calc(100% - 20px);
+  height: calc(100vmin - 20px);
+}
+
+.game-surface {
+  justify-content: center;
+  margin-top: 12px;
+  width: 95vw;
+  margin: auto;
+}

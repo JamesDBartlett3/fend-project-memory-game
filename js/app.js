@@ -13,12 +13,37 @@ $(document).ready(function() {
 }
 */
 
-let deck = [];
+const surface = document.querySelector('.game-surface');
+let cardDeck = [''];
+
+function loadGlyphs() {
+  let glyphs = []
+}
+
+function dealCards() {
+  loadGlyphs();
+  surface.innerHTML = '';
+
+}
 
 $(document).ready(function() {
   /*
   stuff to do when page loads
   */
+
+  // Snippet Source: https://stackoverflow.com/a/11213851
+  $.ajax({
+    url: "./img/glyphs/svg/",
+    success: function(data){
+       $(data).find("a:contains(.svg)").each(function(){
+          // will loop through
+          let images = $(this).attr("href");
+          console.log(images);
+
+       });
+    }
+  });
+
 });
 
 /*
@@ -28,9 +53,7 @@ $(document).ready(function() {
 *   - add each card's HTML to the page
 */
 
-function deploy() {
 
-}
 
 // Shuffle function from http://stackoverflow.com/a/2450976
 function shuffle(array) {
