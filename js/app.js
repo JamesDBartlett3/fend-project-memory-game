@@ -17,8 +17,9 @@ function loadGlyphs() {
 }
 
 function dealCards() {
-  loadGlyphs();
-  surface.innerHTML = '';
+  const cardContainer = '';
+  const cardDeck = '';
+  gameSurface.innerHTML = '';
 
 }
 
