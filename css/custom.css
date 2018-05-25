@@ -16,7 +16,7 @@ body {
 }
 
 .game-surface {
-  width: 85vw;
+  width: 70vw;
   align-items: center;
   text-align: center;
   flex-wrap: nowrap;
@@ -33,7 +33,8 @@ body {
 }
 
 .deck-container {
-  height:80vh;
+  height:70vh;
+  margin-left: -2em;
   /* min-width: 20em;
   min-height: 20em; */
 }

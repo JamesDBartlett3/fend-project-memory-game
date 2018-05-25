@@ -35,8 +35,8 @@ h1 {
 
 .deck {
   background: linear-gradient(160deg, #02ccba 0%, #aa7ecd 100%);
-  padding: 0.75em;
-  column-gap: 0.75em;
+  padding: 0.25em;
+  column-gap: 0.25em;
   border-radius: 10px;
   box-shadow: 12px 15px 20px 0 rgba(46, 61, 73, 0.5);
   justify-content: space-between;
@@ -44,12 +44,13 @@ h1 {
   height: inherit;
   min-width: 15em;
   min-height: 15em;
+  max-height: 70vw;
 }
 
 .card {
-  min-height: 3em;
+  min-height: 2em;
   width: 25%;
-  min-width: 3em;
+  min-width: 2em;
   background: #2e3d49;
   color: #ffffff;
   border-radius: 8px;
@@ -57,7 +58,7 @@ h1 {
   display: flex;
   justify-content: center;
   align-items: center;
-  margin: 0.5em;
+  margin: 0.25em;
   box-shadow: 5px 2px 20px 0 rgba(46, 61, 73, 0.5);
 }
 

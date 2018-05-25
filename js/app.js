@@ -6,6 +6,7 @@ Variable declaration
 let moves = 0;
 let matches = 0;
 let timer = 0;
+const gameSurface = $('.game-surface');
 
 /*
 Function instantiation
@@ -16,22 +17,29 @@ function loadGlyphs() {
   let glyphs = []
 }
 
+function deal() {
+
+}
 
 
 $(document).ready(function() {
   /*
   stuff to do when page loads
   */
-  
-  const container = '<div class="deck-container"></div>';
-  const deck = '<div class="deck"></div>';
-  const row = '<div class="row"></div>'
-  const card = '<div class="card"></div>';
-  $('.game-surface').children().remove();
-  $('.game-surface').append(container);
-  $('.deck-container').append(deck);
-  $('.deck').append(row + row + row + row);
-  $('.row').append(card + card + card + card);
+  const dc = '<div class="deck-container"></div>';
+  const d = '<div class="deck"></div>';
+  const r = '<div class="row"></div>';
+  const c = '<div class="card"></div>';
+  gameSurface.children().remove();
+  gameSurface.append(dc);
+  const deckContainer = $('.deck-container');
+  deckContainer.append(d);
+  const deck = $('.deck');
+  deck.append(r + r + r + r);
+  const row = $('.row');
+  row.append(c + c + c + c);
+  gameSurface.toggleClass('hidden');
+
 
 
 });
