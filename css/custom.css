@@ -16,6 +16,10 @@ body {
   /* font-family: 'Coda', cursive; */
 }
 
+.faceDown {
+  visibility: hidden;
+}
+
 .hidden {
   display: none;
 }

@@ -7,16 +7,20 @@ Variable declaration
 let moves = 0;
 let matches = 0;
 let timer = new Timer;
-let rating = 3;
+let stars = 3;
+let cardA = null;
+let cardB = null;
 
 // Glyphs & Icons
 let glyphs = [];
 let icons = [];
 
-// HTML Content
+// HTML Content & jQuery Selectors
 const dc = '<div class="deck-container"></div>';
 const d = '<div class="deck"></div>';
-const star = '<li><i class="fa fa-star"></i></li>'
+const starsTicker = $('.stars');
+const movesTicker = $('.moves');
+
 
 
 /*
@@ -30,12 +34,26 @@ function buildContainer () {
   gameSurface.toggleClass('hidden');
 }
 
+function storeGlyphs() {
+  if (localStorage.getItem("glyphPaths") == null) {
+    console.log('Downloading & caching glyph paths in localStorage');
+    $.ajaxSetup({async:false});
+    $.get("./glyphs.txt", function(data) {
+      glyphs = data.split(',');
+    }, "text");
+    localStorage.setItem("glyphPaths", JSON.stringify(glyphs));
+    $.ajaxSetup({async:true});
+  }
+  else {
+    console.log('Glyph paths already cached in localStorage.')
+  };
+}
+
+function loadGlyphs() {
+  glyphs = JSON.parse(localStorage.getItem("glyphPaths"));
+}
 
 function pickIcons() {
-  $.ajaxSetup({async:false});
-  $.get("./glyphs.txt", function(data) {
-    glyphs = data.split(',');
-  }, "text");
   glyphs = shuffle(glyphs);
   icons = [
     glyphs[0], glyphs[0], glyphs[1], glyphs[1],
@@ -44,7 +62,6 @@ function pickIcons() {
     glyphs[6], glyphs[6], glyphs[7], glyphs[7]
   ]
   icons = shuffle(icons);
-  $.ajaxSetup({async:true});
 }
 
 function deployCards() {
@@ -55,23 +72,45 @@ function deployCards() {
       let card = $('<div class="card"></div>').attr('id', r + "_" + c);
       let image = icons.pop([cardCount]);
       card.append("<img src='" + image + "' alt='" + image + "'> ");
-      card.css('class', 'hidden');
       row.append(card);
+      card.children().toggleClass('faceDown');
       cardCount++;
     }
     $('.deck').append(row);
   }
 }
 
-function updateScore() {
+function logMove() {
+  moves++;
+  movesTicker.children().eq(1).html(moves);
+  switch(true) {
+    case (moves == 10):
+      removeStar();
+      break;
+    case (moves == 20):
+      removeStar();
+      break;
+    case (moves == 30):
+      removeStar();
+      starsTicker.children().eq(0).append('<li>😭</li>');
+      break;
+  }
+  // console.log("Moves: " + moves + " Rating: " + stars)
+}
+
+function removeStar() {
+  stars--;
+  starsTicker.children().eq(1).remove();
+}
+function flipCard(event) {
 
 }
 
-function flip(event) {
+function checkForMatch(event) {
 
 }
 
-function check(event) {
+function clickCard() {
 
 }
 
@@ -125,6 +164,8 @@ function reload() {
 /*
 stuff to do when page loads
 */
+storeGlyphs();
+loadGlyphs();
 buildContainer();
 pickIcons();
 deployCards();
