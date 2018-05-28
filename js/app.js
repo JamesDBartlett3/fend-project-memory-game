@@ -3,14 +3,29 @@
 Variable declaration
 */
 
+// Scorekeeping Vars
 let moves = 0;
 let matches = 0;
 let timer = 0;
-const gs = $('.game-surface');
+let rating = 3;
+let oneStar = "🌟";
+let twoStar = "🌟🌟";
+let threeStar = "🌟🌟🌟";
+
+// HTML Content Vars
 const dc = '<div class="deck-container"></div>';
 const d = '<div class="deck"></div>';
-const r = '<div class="row"></div>';
-const c = '<div class="card"></div>';
+const r1 = '<div id="r1" class="row"></div>';
+const r2 = '<div id="r2" class="row"></div>';
+const r3 = '<div id="r3" class="row"></div>';
+const r4 = '<div id="r4" class="row"></div>';
+const c1 = '<div id="c1" class="card"></div>';
+const c2 = '<div id="c2" class="card"></div>';
+const c3 = '<div id="c3" class="card"></div>';
+const c4 = '<div id="c4" class="card"></div>';
+
+// jQuery Vars
+const gameSurface = $('.game-surface');
 
 /*
 Function instantiation
@@ -29,14 +44,13 @@ $(document).ready(function() {
   stuff to do when page loads
   */
 
-  gs.children().remove('.deck-container');
-  gs.append(dc);
+  gameSurface.append(dc);
   const deckContainer = $('.deck-container');
   deckContainer.append(d);
   const deck = $('.deck');
-  deck.append(r + r + r + r);
+  deck.append(r1 + r2 + r3 + r4);
   const row = $('.row');
-  row.append(c + c + c + c);
+  row.append(c1 + c2 + c3 + c4);
   gameSurface.toggleClass('hidden');
 
 
