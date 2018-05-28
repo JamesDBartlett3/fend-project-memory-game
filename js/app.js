@@ -95,7 +95,7 @@ function dealCards() { //
       let icon = icons.shift([cardCount]);
       card.append("<img src='img/glyphs/svg/" + icon + "' alt='" + icon + "'> ");
       row.append(card);
-      card.children().addClass('faceDown unClickable');
+      card.children().addClass('faceDown unClickable noSelect');
       cardCount++;
     }
     $('.deck').append(row);
@@ -122,7 +122,6 @@ function logMove() {
 function clickCard() {
   if ($(clickTarget).hasClass('card')) {
     status('Entering clickCard function...');
-    $(gameSurface).addClass('unClickable');
     if (openID == clickedID) {
       status('0_A');
       flipCard(clickTarget);
@@ -148,7 +147,6 @@ function clickCard() {
       cardsFlipped = 0;
       status('2_B');
     }
-    $(gameSurface).removeClass('unClickable');
     status('Exiting clickCard function...');
   }
 }
@@ -160,6 +158,13 @@ function flipCard(f) {
 function removeStar() {
   stars--;
   starsTicker.children().eq(1).remove();
+}
+
+function disableClicks() {
+  $('.game-surface').addClass('unClickable');
+  setTimeout(function() {
+    $('.game-surface').removeClass('unClickable');
+  }, 1000);
 }
 
 function status(x) {
@@ -184,9 +189,14 @@ function checkForMatch() {
    $(cardB).addClass('solved');
  }
  else {
-   console.log("sorry!");
-   flipCard(cardA);
-   flipCard(cardB);
+   disableClicks();
+   setTimeout(function() {
+     console.log("sorry!");
+     flipCard(cardA);
+     flipCard(cardB);
+   },
+  1000);
+
  }
 }
 
