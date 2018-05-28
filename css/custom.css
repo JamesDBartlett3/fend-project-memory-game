@@ -16,6 +16,10 @@ body {
   /* font-family: 'Coda', cursive; */
 }
 
+.hidden {
+  display: none;
+}
+
 .game-surface {
   width: 70vw;
   align-items: center;

@@ -6,7 +6,7 @@ Variable declaration
 // Scorekeeping Vars
 let moves = 0;
 let matches = 0;
-let timer = 0;
+let timer = new Timer;
 let rating = 3;
 
 // Glyphs & Icons
@@ -30,31 +30,34 @@ function buildContainer () {
   gameSurface.toggleClass('hidden');
 }
 
-function getGlyphs() {
+
+function pickIcons() {
+  $.ajaxSetup({async:false});
   $.get("./glyphs.txt", function(data) {
     glyphs = data.split(',');
   }, "text");
-}
-
-function pickIcons() {
+  glyphs = shuffle(glyphs);
   icons = [
-    glyphs[0],glyphs[0],glyphs[1],glyphs[1],
-    glyphs[2],glyphs[2],glyphs[3],glyphs[3],
-    glyphs[4],glyphs[4],glyphs[5],glyphs[5],
-    glyphs[6],glyphs[6],glyphs[7],glyphs[7]
+    glyphs[0], glyphs[0], glyphs[1], glyphs[1],
+    glyphs[2], glyphs[2], glyphs[3], glyphs[3],
+    glyphs[4], glyphs[4], glyphs[5], glyphs[5],
+    glyphs[6], glyphs[6], glyphs[7], glyphs[7]
   ]
+  icons = shuffle(icons);
+  $.ajaxSetup({async:true});
 }
 
 function deployCards() {
-  pickIcons();
-  icons = shuffle(icons);
+  let cardCount = 0;
   for (let r = 0; r < 4; r++) {
     let row = $('<div class="row"></div>');
     for (let c = 0; c < 4; c++) {
       let card = $('<div class="card"></div>').attr('id', r + "_" + c);
-      let s = r + c;
-      card.append("<img src='" + icons[s] +"'>");
+      let image = icons.pop([cardCount]);
+      card.append("<img src='" + image + "' alt='" + image + "'> ");
+      card.css('class', 'hidden');
       row.append(card);
+      cardCount++;
     }
     $('.deck').append(row);
   }
@@ -119,10 +122,13 @@ function reload() {
  }
 
 
- /*
- stuff to do when page loads
- */
- getGlyphs();
- glyphs = shuffle(glyphs);
- buildContainer();
- deployCards();
+/*
+stuff to do when page loads
+*/
+buildContainer();
+pickIcons();
+deployCards();
+timer.start();
+timer.addEventListener('secondsUpdated', function (e) {
+    $('#timer').html(timer.getTimeValues().toString());
+});
