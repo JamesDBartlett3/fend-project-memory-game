@@ -56,11 +56,6 @@
 
   <section class="score-panel">
     <ul class="stars">
-      <li class="rating">Rating: </li>
-      <li><i class="fa fa-star"></i></li>
-      <li><i class="fa fa-star"></i></li>
-      <li><i class="fa fa-star"></i></li>
-      <li class="spacer">//</li>
     </ul>
     <ul class="timer">
       <li>Time Elapsed: </li>
@@ -72,8 +67,8 @@
       <li class="text" id="moves">0</li>
       <li class="spacer">//</li>
     </ul>
-    <ul class="restart" onclick="reload()">
-      <li class="restart">Restart</li>
+    <ul class="restart" onclick="newGame()">
+      <li class="restart">New Game</li>
       <i class="fa fa-repeat"></i>
     </ul>
   </section>
@@ -81,7 +76,7 @@
 
     <div class="container">
 
-        <div class="game-surface hidden"></div>
+        <div class="game-surface"></div>
 
     </div>
     <script src="js/app.js"></script>

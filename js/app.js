@@ -1,6 +1,6 @@
 
 /*
-Variable declaration
+Variables
 */
 
 // Scorekeeping Vars
@@ -8,70 +8,85 @@ let moves = 0;
 let matches = 0;
 let timer = new Timer;
 let stars = 3;
-let cardA = null;
-let cardB = null;
+let cardsFlipped = 0;
+let glyphsCached = false;
 
-// Glyphs & Icons
-let glyphs = [];
-let icons = [];
+// Arrays
+let glyphs = []; // will contain paths to all 800 possible glyphs
+let icons = []; // will contain 8 random glyph pairs for a total of 16 items
+let openCards = []; // will contain up to 2 cards at a time, for comparison
 
-// HTML Content & jQuery Selectors
-const dc = '<div class="deck-container"></div>';
-const d = '<div class="deck"></div>';
+// Empty HTML Content & jQuery Selectors
+const emptyDeckContainer = '<div class="deck-container"></div>';
+const emptyDeck = '<div class="deck"></div>';
+const emptyRow = '<div class="row"></div>';
+const emptyCard = '<div class="card"></div>';
+const gameSurface = $('.game-surface');
 const starsTicker = $('.stars');
 const movesTicker = $('.moves');
 
+// Template Literals
+let initStars = `
+  <li class="rating">Rating: </li>
+  <li><i class="fa fa-star"></i></li>
+  <li><i class="fa fa-star"></i></li>
+  <li><i class="fa fa-star"></i></li>
+  <li class="spacer">//</li>
+  `
 
 
 /*
-Functions
+Original Functions
 */
 
 function buildContainer () {
-  const gameSurface = $('.game-surface');
-  gameSurface.append(dc);
-  $('.deck-container').append(d);
-  gameSurface.toggleClass('hidden');
+  gameSurface.children().remove();
+  gameSurface.append(emptyDeckContainer);
+  gameSurface.children().append(emptyDeck);
 }
 
 function storeGlyphs() {
-  if (localStorage.getItem("glyphPaths") == null) {
-    console.log('Downloading & caching glyph paths in localStorage');
-    $.ajaxSetup({async:false});
-    $.get("./glyphs.txt", function(data) {
-      glyphs = data.split(',');
-    }, "text");
-    localStorage.setItem("glyphPaths", JSON.stringify(glyphs));
-    $.ajaxSetup({async:true});
+  if (glyphsCached == false) {
+    if (localStorage.getItem("glyphNames") == null) { //if localStorage is empty
+      // Download & cache glyph filenames in localStorage
+      $.ajaxSetup({async:false}); //synchronous ajax mode ensures download completion
+      $.get("./glyphs.txt", function(data) { // ajax get glyphs.txt file
+        glyphs = data.split(','); // parse data using comma separation
+      }, "text"); // ensure data is processed as text rather than JSON object
+      localStorage.setItem("glyphNames", JSON.stringify(glyphs)); // cache in localStorage
+      $.ajaxSetup({async:true}); // re-enable asynchronous ajax mode
+      glyphsCached = true;
+    }
+    else {
+      glyphsCached = true;
+      // console.log('glyph filenames already cached in localStorage.')
+    }
   }
-  else {
-    console.log('Glyph paths already cached in localStorage.')
-  };
 }
 
 function loadGlyphs() {
-  glyphs = JSON.parse(localStorage.getItem("glyphPaths"));
+  glyphs = JSON.parse(localStorage.getItem("glyphNames"));
 }
 
 function pickIcons() {
-  glyphs = shuffle(glyphs);
-  icons = [
+  glyphs = shuffle(glyphs); // shuffle glyphs array
+  icons = [ // store pairs of icons from first 8 items in glyphs array
     glyphs[0], glyphs[0], glyphs[1], glyphs[1],
     glyphs[2], glyphs[2], glyphs[3], glyphs[3],
     glyphs[4], glyphs[4], glyphs[5], glyphs[5],
     glyphs[6], glyphs[6], glyphs[7], glyphs[7]
   ]
-  icons = shuffle(icons);
+  icons = shuffle(icons); // shuffle icons array
 }
 
-function deployCards() {
+function dealCards() { //
   let cardCount = 0;
   for (let r = 0; r < 4; r++) {
-    let row = $('<div class="row"></div>');
+    let row = $(emptyRow);
     for (let c = 0; c < 4; c++) {
-      let card = $('<div class="card"></div>').attr('id', r + "_" + c);
-      let image = icons.pop([cardCount]);
-      card.append("<img src='" + image + "' alt='" + image + "'> ");
+      let card = $(emptyCard).attr('id', r + "_" + c);
+      let icon = icons.shift([cardCount]);
+      card.append("<img src='img/glyphs/svg/" + icon + "' alt='" + icon + "'> ");
       row.append(card);
       card.children().toggleClass('faceDown');
       cardCount++;
@@ -98,35 +113,95 @@ function logMove() {
   // console.log("Moves: " + moves + " Rating: " + stars)
 }
 
+function clickCard(val) {
+  if (cardsFlipped == 0) {
+    flipCard(val);
+  }
+  else {
+
+    logMove();
+  }
+}
+
+function flipCard(val) {
+  $('#'+val);
+}
+
 function removeStar() {
   stars--;
   starsTicker.children().eq(1).remove();
 }
-function flipCard(event) {
 
+
+function hideBoard(val) {
+  if (val == 1) {
+    $(gameSurface).addClass('hidden');
+  }
+  else {
+    $(gameSurface).removeClass('hidden');
+  }
 }
 
-function checkForMatch(event) {
-
-}
-
-function clickCard() {
-
+function checkForMatch() {
+ if (openCards[0] === openCards[1]) {
+   console.log("matched!");
+ }
+ else {
+   console.log("sorry!");
+ }
 }
 
 function reload() {
-  location.reload();
+  moves = 0;
+  matches = 0;
+  stars = 3;
+  cardsFlipped = 0;
+  openCards = [];
+  starsTicker.children().remove();
+  starsTicker.append(initStars);
+  gameSurface.children().remove();
+  timer.reset();
+  movesTicker.children().eq(1).html(moves);
+}
+
+function newGame() {
+  console.clear();
+  hideBoard(1);
+  reload();
+  storeGlyphs();
+  loadGlyphs();
+  pickIcons();
+  buildContainer();
+  dealCards();
+  startTimer();
+  hideBoard(0);
 }
 
 
-
 /*
-* Display the cards on the page
-*   - shuffle the list of cards using the provided "shuffle" method below
-*   - loop through each card and create its HTML
-*   - add each card's HTML to the page
+3rd Party Functions
 */
 
+// EasyTimer.js -- source: https://github.com/albert-gonzalez/easytimer.js
+function startTimer() {
+  timer.start();
+  timer.addEventListener('secondsUpdated', function (e) {
+      $('#timer').html(timer.getTimeValues().toString());
+  });
+}
+
+// Shuffle function from http://stackoverflow.com/a/2450976
+function shuffle(array) {
+    var currentIndex = array.length, temporaryValue, randomIndex;
+    while (currentIndex !== 0) {
+        randomIndex = Math.floor(Math.random() * currentIndex);
+        currentIndex -= 1;
+        temporaryValue = array[currentIndex];
+        array[currentIndex] = array[randomIndex];
+        array[randomIndex] = temporaryValue;
+    }
+    return array;
+}
 
 
 // Event Listeners:
@@ -145,31 +220,9 @@ function reload() {
  */
 
 
- // Shuffle function from http://stackoverflow.com/a/2450976
- function shuffle(array) {
-     var currentIndex = array.length, temporaryValue, randomIndex;
-
-     while (currentIndex !== 0) {
-         randomIndex = Math.floor(Math.random() * currentIndex);
-         currentIndex -= 1;
-         temporaryValue = array[currentIndex];
-         array[currentIndex] = array[randomIndex];
-         array[randomIndex] = temporaryValue;
-     }
-
-     return array;
- }
 
 
 /*
 stuff to do when page loads
 */
-storeGlyphs();
-loadGlyphs();
-buildContainer();
-pickIcons();
-deployCards();
-timer.start();
-timer.addEventListener('secondsUpdated', function (e) {
-    $('#timer').html(timer.getTimeValues().toString());
-});
+newGame();
