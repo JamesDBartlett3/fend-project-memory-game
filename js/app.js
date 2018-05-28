@@ -6,7 +6,7 @@ Variable declaration
 let moves = 0;
 let matches = 0;
 let timer = 0;
-const gameSurface = $('.game-surface');
+const gs = $('.game-surface');
 const dc = '<div class="deck-container"></div>';
 const d = '<div class="deck"></div>';
 const r = '<div class="row"></div>';
@@ -29,8 +29,8 @@ $(document).ready(function() {
   stuff to do when page loads
   */
 
-  gameSurface.children().remove('.deck-container');
-  gameSurface.append(dc);
+  gs.children().remove('.deck-container');
+  gs.append(dc);
   const deckContainer = $('.deck-container');
   deckContainer.append(d);
   const deck = $('.deck');
@@ -48,6 +48,15 @@ $(document).ready(function() {
 *   - loop through each card and create its HTML
 *   - add each card's HTML to the page
 */
+
+
+function flip(event) {
+
+}
+
+function check(event) {
+
+}
 
 
 
