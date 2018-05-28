@@ -3,18 +3,28 @@
 Variables
 */
 
+// Modal Control & Content Vars
+let modalSelector = $('#centerModal');
+let modalTitle = $('.modal-title');
+let modalContent = $('.modal-content');
+let modalBody = $('.modal-body');
+let modalFooter = $('.modal-footer');
+let closeModal = $('#closeModal');
+let modalStartGame = $('#startGame');
+
 // Scorekeeping Vars
 let moves = 0;
 let matches = 0;
 let timer = new Timer;
+let finalTime = '';
 let stars = 3;
 let cardsFlipped = 0;
-let clickTarget = "";
-let clickedIcon = "";
-let clickedID = "";
-let openID = "";
-let cardA = "";
-let cardB = "";
+let clickTarget = '';
+let clickedIcon = '';
+let clickedID = '';
+let openID = '';
+let cardA = '';
+let cardB = '';
 let glyphsCached = false;
 
 // Arrays
@@ -95,7 +105,7 @@ function dealCards() { //
       let icon = icons.shift([cardCount]);
       card.append("<img src='img/glyphs/svg/" + icon + "' alt='" + icon + "'> ");
       row.append(card);
-      card.children().addClass('faceDown unClickable noSelect');
+      card.children().addClass('faceDown unClickable noSelect si-glyph');
       cardCount++;
     }
     $('.deck').append(row);
@@ -106,13 +116,13 @@ function logMove() {
   moves++;
   movesTicker.children().eq(1).html(moves);
   switch(true) {
-    case (moves == 10):
+    case (moves == 13):
       removeStar();
       break;
-    case (moves == 20):
+    case (moves == 17):
       removeStar();
       break;
-    case (moves == 30):
+    case (moves == 21):
       removeStar();
       starsTicker.children().eq(0).append('<li>😭</li>');
       break;
@@ -121,33 +131,25 @@ function logMove() {
 
 function clickCard() {
   if ($(clickTarget).hasClass('card')) {
-    status('Entering clickCard function...');
     if (openID == clickedID) {
-      status('0_A');
       flipCard(clickTarget);
       logMove();
       cardsFlipped = 0;
-      status('0_B');
     }
     else if (cardsFlipped == 0) {
-      status('1_A');
       cardA = clickTarget;
       openCards[0] = clickedIcon;
       flipCard(cardA);
       cardsFlipped = 1;
-      status('1_B');
     }
     else {
-      status('2_A');
       cardB = clickTarget;
       openCards[1] = clickedIcon;
       flipCard(cardB);
       checkForMatch();
       logMove();
       cardsFlipped = 0;
-      status('2_B');
     }
-    status('Exiting clickCard function...');
   }
 }
 
@@ -164,7 +166,7 @@ function disableClicks() {
   $('.game-surface').addClass('unClickable');
   setTimeout(function() {
     $('.game-surface').removeClass('unClickable');
-  }, 1000);
+  }, 750);
 }
 
 function status(x) {
@@ -184,30 +186,50 @@ function hideBoard(val) {
 
 function checkForMatch() {
  if (openCards[0] == openCards[1]) {
-   console.log("matched!");
    $(cardA).addClass('solved');
    $(cardB).addClass('solved');
+   matches++;
+   if (matches == 8){
+     youWin();
+   }
  }
  else {
    disableClicks();
    setTimeout(function() {
-     console.log("sorry!");
      flipCard(cardA);
      flipCard(cardB);
    },
-  1000);
-
+  750);
  }
 }
 
-// function clicktivated(x, target) {
-//   if (x) {
-//     $(target).removeClass('unClickable');
-//   }
-//   else {
-//     $(target).addClass('unClickable');
-//   }
-// }
+function greeting() {
+  modalBody.append('<p>Hybrid Electrochemical Visuospatial Icon Orientation Engine (The Human Brain)</p><p> -- Vs. -- </p><p>The Inevitable, Unrelenting Laws of Chaos & Entropy</p>')
+  closeModal.addClass('hidden');
+  modalStartGame.text('Start Game');
+  modalSelector.modal({'show': true});
+  modalStartGame.click(function() {
+    modalSelector.modal('hide');
+    newGame();
+  });
+}
+
+
+function youWin() {
+  timer.stop();
+  finalTime = $('#timer').html().toString();
+  modalTitle.text('Congratulations: You Win!');
+  modalBody.children().remove();
+  modalStartGame.text('Play Again');
+  modalBody.append('<p>You have solved the puzzle. Here are your scores:</p>');
+  modalBody.append('<p>Final Time: ' + finalTime + '</p>');
+  modalBody.append('<p>Total Moves: ' + moves + '</p>');
+  modalBody.append('<p>Star Rating: ' + stars + '</p>');
+
+  // animate/detonate gameSurface
+  modalSelector.modal({'show': true});
+}
+
 
 function reload() {
   moves = 0;
@@ -237,7 +259,7 @@ function newGame() {
 
 
 /*
-3rd Party Functions
+3rd Party Functions & Libraries
 */
 
 // EasyTimer.js -- source: https://github.com/albert-gonzalez/easytimer.js
@@ -265,29 +287,13 @@ function shuffle(array) {
 // Event Listeners:
 
 gameSurface.click(function(event) {
-  // console.log(clickTarget);
   clickTarget = $(event.target);
   clickedIcon = $(clickTarget).children().attr('alt');
   clickedID = $(clickTarget).attr('id');
-  status('Values on exiting gameSurface.click event...')
   clickCard();
 });
 
 /*
- * set up the event listener for a card. If a card is clicked:
- *  - display the card's symbol (put this functionality in another function that you call from this one)
- *  - add the card to a *list* of "open" cards (put this functionality in another function that you call from this one)
- *  - if the list already has another card, check to see if the two cards match
- *    + if the cards do match, lock the cards in the open position (put this functionality in another function that you call from this one)
- *    + if the cards do not match, remove the cards from the list and hide the card's symbol (put this functionality in another function that you call from this one)
- *    + increment the move counter and display it on the page (put this functionality in another function that you call from this one)
- *    + if all cards have matched, display a message with the final score (put this functionality in another function that you call from this one)
- */
-
-
-
-
-/*
 stuff to do when page loads
 */
-newGame();
+greeting();
