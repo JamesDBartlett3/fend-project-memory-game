@@ -3,7 +3,7 @@
 ## Table of Contents
 
 * [Instructions](#instructions)
-* [3rd Party Code](#3rd Party Code)
+* [3rd Party Code](#3rd-Party-Code)
 
 ## Instructions
 
