@@ -3,27 +3,17 @@
 ## Table of Contents
 
 * [Instructions](#instructions)
-* [Contributing](#contributing)
 * [3rd Party Code](#3rd Party Code)
 
 ## Instructions
 
-The starter project has some HTML and CSS styling to display a static version of the Memory Game project. You'll need to convert this project from a static project to an interactive one. This will require modifying the HTML and CSS files, but primarily the JavaScript file.
-
-To get started, open `js/app.js` and start building out the app's functionality
-
-For specific, detailed instructions, look at the project instructions in the [Udacity Classroom](https://classroom.udacity.com/me).
-
-## Contributing
-
-This repository is the starter code for _all_ Udacity students. Therefore, we most likely will not accept pull requests.
-
-For details, check out [CONTRIBUTING.md](CONTRIBUTING.md).
+This is a game that tests the short term memory of the player. Click on a card to reveal its symbol. Click another card to see if it matches the first. If you get a match, the two cards you've selected will remain visible. If you don't get a match, the cards will flip back, and you'll have to try and remember where you saw those symbols. Keep clicking and matching until all of the cards are displayed, and you will win the game!
 
 ## 3rd Party Code
 
 The following 3rd party libraries and support files were used in this project:
 * [Glyph Icons](http://github.com/frexy/glyph-iconset)
-* [Bootstrap]()
-* [jQuery]()
-* [Popper.js]()
+* [Bootstrap](https://getbootstrap.com/)
+* [jQuery](https://jquery.com/)
+* [EasyTimer.js](https://github.com/albert-gonzalez/easytimer.js)
+* [Array Shuffler](http://stackoverflow.com/a/2450976)
