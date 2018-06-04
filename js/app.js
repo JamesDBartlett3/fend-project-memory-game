@@ -168,17 +168,17 @@ function clickCard() { // conditionally calls flipCard, logMove, & checkForMatch
     timerRunning = true;
   }
   if ($(clickTarget).hasClass('card')) { // must actually be a card
-    if (openID == clickedID) { // if user clicked the same card twice
-      flipCard(clickTarget); // flip it back over
-      logMove(); // log a move
-      cardsFlipped = 0; // set cardsFlipped back to 0
-    }
-    else if (cardsFlipped == 0) { // if no cards are flipped
+    if (cardsFlipped == 0) { // if no cards are flipped
       cardA = clickTarget; // set cardA to the clicked card image name
       openID = clickedID; // set openID to clickedID
       openCards[0] = clickedIcon; // set openCards[0] to clickedIcon
       flipCard(cardA); // flip cardA
       cardsFlipped = 1; // set cardsFlipped to 1
+    }
+    else if (openID == clickedID) { // if user clicked the same card twice
+      flipCard(clickTarget); // flip it back over
+      logMove(); // log a move
+      cardsFlipped = 0; // set cardsFlipped back to 0
     }
     else { // if a card is flipped
       cardB = clickTarget; // set cardB to clickTarget
