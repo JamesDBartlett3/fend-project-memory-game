@@ -2,8 +2,13 @@
 
 ## Table of Contents
 
+* [Notes to Code Reviewers](#notes-to-code-reviewers)
 * [Instructions](#instructions)
 * [3rd Party Code](#3rd-Party-Code)
+
+## Notes to Code Reviewers
+
+Please read the comments in my app.js file, as they will explain most of what's going on. Also, please note that the game will log a move if the player clicks the same card twice. This is by design, and not a bug. I made it this way so that the player cannot go around the board double-clicking cards to peek at their faces without having the move counter show that they had done so. 
 
 ## Instructions
 
