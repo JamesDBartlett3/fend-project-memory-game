@@ -1,3 +1,8 @@
+/* --------------------------------------------
+This is the old version, which loads the icon
+filenames via ajax get.
+----------------------------------------------*/
+
 
 /*
 Variables
