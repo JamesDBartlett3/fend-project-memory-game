@@ -6,6 +6,7 @@ Variables
 // Game Parameters
 const flipBack = 750; // time in milliseconds before mismatched pairs flip back
 let timerRunning = false;
+//
 
 
 // Modal Window Control & Content Variables
