@@ -78,7 +78,7 @@ function loadGlyphs() { // store, retrieve, & load glyph icons
   // in Google Chrome (which disallows local ajax calls).
   // I didn't test for this scenario, because real-world users
   // will view and play the game on a website like GitHub Pages
-  // (https://jamesdbartlett.github.io/fend-project-memory-game/),
+  // (https://jamesdbartlett3.github.io/fend-project-memory-game/),
   // not by downloading the code and running it locally.
   // Please either load the page from the link above, or try it on
   // a browser that allows local ajax calls, like Firefox.
