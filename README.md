@@ -10,7 +10,7 @@
 
 Please read the comments in my app.js file, as they will explain most of what's going on. Also, please note that the game will log a move if the player clicks the same card twice. This is by design, and not a bug. I made it this way so that the player cannot go around the board double-clicking cards to peek at their faces without having the move counter show that they had done so. 
 
-Also, please do NOT just download the whole repo to your hard drive and try to run it from there. It will not work if you're using Google Chrome, or other browsers that don't support local ajax calls. If you want to view it locally, try Firefox. If you'd rather stick with Chrome, you should [view the project on GitHub Pages.](https://jamesdbartlett.github.io/fend-project-memory-game/)
+Also, please do NOT just download the whole repo to your hard drive and try to run it from there. It will not work if you're using Google Chrome, or other browsers that don't support local ajax calls. If you want to view it locally, try Firefox. If you'd rather stick with Chrome, you should [view the project on GitHub Pages.](https://jamesdbartlett3.github.io/fend-project-memory-game/)
 
 ## Instructions
 
